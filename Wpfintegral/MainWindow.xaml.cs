@@ -18,9 +18,7 @@ using System.Diagnostics;
 
 namespace Wpfintegral
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
+
     public partial class MainWindow : Window
     {
         public MainWindow()
@@ -35,8 +33,8 @@ namespace Wpfintegral
 
         private double SubIntegral(double x)
         {
-            return 2 * x - Math.Log(2 * x) + 234;
-            //return x*x;
+            //return 31 * x - Math.Log(5 * x)+5 ;
+            return x*x;
         }
 
         private void DoCalculate()
@@ -44,7 +42,6 @@ namespace Wpfintegral
             double upLimit = Convert.ToDouble(tbUpLimit.Text);
             double downLimit = Convert.ToDouble(tbDownLimit.Text);
             int count = Convert.ToInt32(tbCount.Text);
-            //MessageBox.Show($"Верхний предел ={upLimit} Нижний предел = {downLimit} Количество разбиений = {count}");
             ICalculatorIntegral calculyator = GetCalculator();
             double answer = calculyator.Calculate(downLimit, upLimit, count, SubIntegral);
             tbAnswer.Text = Convert.ToString(answer);
@@ -52,15 +49,12 @@ namespace Wpfintegral
 
         private ICalculatorIntegral GetCalculator()
         {
-            if (cmbVarietion.SelectedIndex == 0)
-            {
-                return new IntegralCalculateTrapecia();
-            }
-            else if (cmbVarietion.SelectedIndex == 1)
+           
+             if (cmbVarietion.SelectedIndex == 0)
             {
                 return new IntegralCalculateRectangle();
             }
-            else if (cmbVarietion.SelectedIndex == 2)
+            else if (cmbVarietion.SelectedIndex == 1)
             {
                 return new IntegralCalculateSimpson();
             }
@@ -75,14 +69,9 @@ namespace Wpfintegral
             MainViewModel Graph = this.DataContext as MainViewModel;
             Graph.Points.Clear();
             long[] massLong = new long[6];
-            if (cmbParallelNoParallel.SelectedIndex == 0)
-            {
+
                 massLong = Timer();
-            }
-            else
-            {
-                massLong = TimerParallel();
-            }
+            
             for (int i = 0; i < 8; i++)
             {
                 Graph.Points.Add(new DataPoint(Convert.ToInt32(Math.Pow(10, i)), massLong[i]));
@@ -97,26 +86,12 @@ namespace Wpfintegral
             for (int i = 0; i < 8; i++)
             {
                 timeIntegrate.Restart();
-                probe.Calculate(0, 1000, Convert.ToInt32(Math.Pow(10, i)), (x) => 2 * x - Math.Log(2 * x) + 234);
+                probe.Calculate(0, 1000, Convert.ToInt32(Math.Pow(10, i)), (x) => 31 * x - Math.Log(5 * x) + 5);
                 timeIntegrate.Stop();
                 time[i] = timeIntegrate.ElapsedMilliseconds;
             }
             return time;
         }
 
-        public static long[] TimerParallel()
-        {
-            long[] time = new long[8];
-            Stopwatch timeIntegrate = new Stopwatch();
-            IntegralCalculateRectangle probe = new IntegralCalculateRectangle();
-            for (int i = 0; i < 8; i++)
-            {
-                timeIntegrate.Restart();
-                probe.CalculateParallel(0, 1000, Convert.ToInt32(Math.Pow(10, i)), (x) => 2 * x - Math.Log(2 * x) + 234);
-                timeIntegrate.Stop();
-                time[i] = timeIntegrate.ElapsedMilliseconds;
-            }
-            return time;
-        }
     }
 }

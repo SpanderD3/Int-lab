@@ -15,7 +15,7 @@
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>x64</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -72,7 +72,6 @@
     </Compile>
     <Compile Include="Clasess\IntegralCalculateSimpson.cs" />
     <Compile Include="MainNewModel.cs" />
-    <Compile Include="Clasess\IntegralCalculateTrapecia.cs" />
     <Compile Include="Clasess\IntegralCalculateRectangle.cs" />
     <Compile Include="Clasess\ICalculatorIntegral.cs" />
     <Compile Include="MainWindow.xaml.cs">
@@ -107,6 +106,8 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="1639400489_4-kartinkin-net-p-arti-leona-bravo-stars-krasivo-oboi-4.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
