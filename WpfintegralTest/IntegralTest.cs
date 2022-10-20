@@ -45,7 +45,7 @@ namespace WpfintegralTest
             double actual = integral.Calculate(1000, 1, 1, (x) => x * x);
         }
         [TestMethod]
-        [ExpectedException(typeof(Exception))] // поменяны пределы
+        [ExpectedException(typeof(Exception))] 
         public void TestMethod4()
         {
             IntegralCalculateRectangle integral = new IntegralCalculateRectangle();
