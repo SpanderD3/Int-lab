@@ -33,8 +33,7 @@ namespace Wpfintegral
 
         private double SubIntegral(double x)
         {
-            //return 31 * x - Math.Log(5 * x)+5 ;
-            return x*x;
+            return 31 * x - Math.Log(5 * x)+5 ;
         }
 
         private void DoCalculate()
